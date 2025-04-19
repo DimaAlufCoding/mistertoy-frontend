@@ -5,7 +5,10 @@ export const utilService = {
     loadFromStorage,
     saveToStorage,
     animateCSS,
-    debounce
+    debounce,
+    getRandomFromArray,
+    getRandomSubset,
+
 }
 
 function makeId(length = 6) {
@@ -70,4 +73,14 @@ function debounce(func, timeout = 300) {
             func.apply(this, args)
         }, timeout)
     }
+}
+
+
+function getRandomFromArray(arr) {
+    return arr[Math.floor(Math.random() * arr.length)]
+}
+
+function getRandomSubset(arr, count = utilService.getRandomIntInclusive(1, 3)) {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random())
+    return shuffled.slice(0, count)
 }

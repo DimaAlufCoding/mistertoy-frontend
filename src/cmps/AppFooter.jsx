@@ -1,22 +1,22 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/car.reducer.js'
+import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/toy.reducer.js'
 
 import { UserMsg } from './UserMsg.jsx'
 import { ShoppingCart } from './ShoppingCart.jsx'
 
 export function AppFooter() {
     const dispatch = useDispatch()
-    const isCartShown = useSelector(storeState => storeState.carModule.isCartShown)
+    const isCartShown = useSelector(storeState => storeState.toyModule.isCartShown)
     const count = useSelector(storeState => storeState.userModule.count)
-    const carsLength = useSelector(storeState => storeState.carModule.cars.length)
-    const shoppingCartLength = useSelector(storeState => storeState.carModule.shoppingCart.length)
+    const toysLength = useSelector(storeState => storeState.toyModule.toys.length)
+    const shoppingCartLength = useSelector(storeState => storeState.toyModule.shoppingCart.length)
 
 
     return (
         <footer className='app-footer'>
             <h5>
-                Currently {carsLength} cars in the shop
+                Currently {toysLength} toys in the shop
             </h5>
             <p>
                 Coffeerights to all - Count: {count}

@@ -1,65 +1,65 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-import { carService } from "../services/car.service.js"
+import { toyService } from "../services/toy.service.local.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
-import { saveCar } from "../store/actions/car.actions.js"
+import { saveToy } from "../store/actions/toy.actions.js"
 import { useConfirmTabClose } from '../hooks/useConfirmTabClose.js'
 
 
-export function CarEdit() {
+export function ToyEdit() {
     const navigate = useNavigate()
-    const [carToEdit, setCarToEdit] = useState(carService.getEmptyCar())
-    const { carId } = useParams()
+    const [toyToEdit, setToyToEdit] = useState(toyService.getEmptyToy())
+    const { toyId } = useParams()
 
     const hasChanges = useRef(false)
     useConfirmTabClose(hasChanges)
 
     useEffect(() => {
-        if (carId) loadCar()
+        if (toyId) loadToy()
     }, [])
 
-    function loadCar() {
-        carService.getById(carId)
-            .then(car => setCarToEdit(car))
+    function loadToy() {
+        toyService.getById(toyId)
+            .then(toy => setToyToEdit(toy))
             .catch(err => {
-                console.log('Had issues in car edit', err)
-                navigate('/car')
+                console.log('Had issues in toy edit', err)
+                navigate('/toy')
             })
     }
 
     function handleChange({ target }) {
         let { value, type, name: field } = target
         value = type === 'number' ? +value : value
-        setCarToEdit((prevCar) => ({ ...prevCar, [field]: value }))
+        setToyToEdit((prevToy) => ({ ...prevToy, [field]: value }))
         hasChanges.current = true
     }
 
-    function onSaveCar(ev) {
+    function onSaveToy(ev) {
         ev.preventDefault()
-        if (!carToEdit.price) carToEdit.price = 1000
-        saveCar(carToEdit)
+        if (!toyToEdit.price) toyToEdit.price = 1000
+        saveToy(toyToEdit)
             .then(() => {
-                showSuccessMsg('Car Saved!')
-                navigate('/car')
+                showSuccessMsg('Toy Saved!')
+                navigate('/toy')
             })
             .catch(err => {
-                console.log('Had issues in car details', err)
-                showErrorMsg('Had issues in car details')
+                console.log('Had issues in toy details', err)
+                showErrorMsg('Had issues in toy details')
             })
     }
 
     return (
         <section className="car-edit">
-            <h2>{carToEdit._id ? 'Edit' : 'Add'} Car</h2>
+            <h2>{toyToEdit._id ? 'Edit' : 'Add'} Toy</h2>
 
-            <form onSubmit={onSaveCar} >
+            <form onSubmit={onSaveToy} >
                 <label htmlFor="vendor">Vendor : </label>
                 <input type="text"
                     name="vendor"
                     id="vendor"
                     placeholder="Enter vendor..."
-                    value={carToEdit.vendor}
+                    value={toyToEdit.name}
                     onChange={handleChange}
                 />
                 <label htmlFor="price">Price : </label>
@@ -67,13 +67,13 @@ export function CarEdit() {
                     name="price"
                     id="price"
                     placeholder="Enter price"
-                    value={carToEdit.price}
+                    value={toyToEdit.price}
                     onChange={handleChange}
                 />
 
                 <div>
-                    <button>{carToEdit._id ? 'Save' : 'Add'}</button>
-                    <Link to="/car">Cancel</Link>
+                    <button>{toyToEdit._id ? 'Save' : 'Add'}</button>
+                    <Link to="/toy">Cancel</Link>
                 </div>
             </form>
         </section>

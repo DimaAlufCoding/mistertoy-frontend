@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/car.reducer.js'
+import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/toy.reducer.js'
 import { logout } from '../store/actions/user.actions.js'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
@@ -31,11 +31,11 @@ export function AppHeader() {
     return (
         <header className="app-header full main-layout">
             <section className="header-container">
-                <h1>React Car App</h1>
+                <h1>React Mister Toy</h1>
                 <nav className="app-nav">
                     <NavLink to="/" >Home</NavLink>
                     <NavLink to="/about" >About</NavLink>
-                    <NavLink to="/car" >Cars</NavLink>
+                    <NavLink to="/toy" >Toys</NavLink>
                     <a onClick={onToggleCart} href="#">🛒 Cart</a>
 
                 </nav>

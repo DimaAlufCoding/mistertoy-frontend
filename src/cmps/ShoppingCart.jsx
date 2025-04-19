@@ -1,22 +1,22 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-import { REMOVE_CAR_FROM_CART } from '../store/reducers/car.reducer.js'
+import { REMOVE_TOY_FROM_CART } from '../store/reducers/toy.reducer.js'
 import { checkout } from '../store/actions/user.actions.js'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 export function ShoppingCart({ isCartShown }) {
     const dispatch = useDispatch()
-    const shoppingCart = useSelector(storeState => storeState.carModule.shoppingCart)
+    const shoppingCart = useSelector(storeState => storeState.toyModule.shoppingCart)
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
 
-    function removeFromCart(carId) {
-        console.log(`Todo: remove: ${carId} from cart`)
-        dispatch({ type: REMOVE_CAR_FROM_CART, carId })
+    function removeFromCart(toyId) {
+        console.log(`Todo: remove: ${toyId} from cart`)
+        dispatch({ type: REMOVE_TOY_FROM_CART, carId })
     }
 
     function getCartTotal() {
-        return shoppingCart.reduce((acc, car) => acc + car.price, 0)
+        return shoppingCart.reduce((acc, toy) => acc + toy.price, 0)
     }
 
     function onCheckout() {
@@ -37,11 +37,11 @@ export function ShoppingCart({ isCartShown }) {
             <h5>Your Cart</h5>
             <ul>
                 {
-                    shoppingCart.map((car, idx) => <li key={idx}>
+                    shoppingCart.map((toy, idx) => <li key={idx}>
                         <button onClick={() => {
-                            removeFromCart(car._id)
+                            removeFromCart(toy._id)
                         }}>x</button>
-                        {car.vendor} | ${car.price}
+                        {toy.name} | ${toy.price}
                     </li>)
                 }
             </ul>
