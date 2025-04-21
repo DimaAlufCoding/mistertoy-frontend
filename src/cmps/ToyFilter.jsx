@@ -3,17 +3,29 @@ import { useState, useEffect, useRef } from 'react'
 import { utilService } from "../services/util.service.js"
 
 export function ToyFilter({ filterBy, onSetFilter }) {
+    const availableLabels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 'Outdoor', 'Battery Powered']
 
-    const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
-    onSetFilter = useRef(utilService.debounce(onSetFilter, 300))
+    const [filterByToEdit, setFilterByToEdit] = useState({
+        ...filterBy,
+        label: filterBy.labels || [],
+        sortBy: filterBy.sortBy || '',
+
+    })
+    const debouncedSetFilter = useRef(utilService.debounce(onSetFilter, 300))
 
     useEffect(() => {
-        onSetFilter.current(filterByToEdit)
+        debouncedSetFilter.current(filterByToEdit)
     }, [filterByToEdit])
 
     function handleChange({ target }) {
-        let { value, name: field, type } = target
-        value = type === 'number' ? +value : value
+        let { value, name: field, type, selectedOptions } = target
+        if (type === 'select-multiple') {
+            const values = Array.from(selectedOptions, option => option.value)
+            value = values.includes('__ALL__') ? [] : values
+
+        } else {
+            value = type === 'number' ? +value : value
+        }
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
@@ -38,6 +50,42 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                     value={filterByToEdit.maxPrice || ''}
                     onChange={handleChange}
                 />
+                <select
+                    name="inStock"
+                    value={filterBy.inStock === undefined ? 'all' : filterBy.inStock.toString()}
+                    onChange={(ev) => {
+                        const value = ev.target.value
+                        const inStock = value === 'all' ? undefined : value === 'true'
+                        onSetFilter({ ...filterBy, inStock })
+                    }}
+                >
+                    <option value="all">All</option>
+                    <option value="true">In Stock</option>
+                    <option value="false">Out of Stock</option>
+                </select>
+                <label htmlFor="labels">Labels:</label>
+                <select id="labels"
+                    name="labels"
+                    multiple
+                    value={filterByToEdit.labels}
+                    onChange={handleChange}
+                >
+                    <option value="__ALL__">-- All Labels --</option>
+                    {availableLabels.map(label => (
+                        <option key={label} value={label}>{label}</option>
+                    ))}
+                </select>
+                <select
+                    id="sortBy"
+                    name="sortBy"
+                    value={filterByToEdit.sortBy || ''}
+                    onChange={handleChange}
+                >
+                    <option value="">-- Select --</option>
+                    <option value="name">Name</option>
+                    <option value="price">Price</option>
+                    <option value="created">Created</option>
+                </select>
             </form>
         </section>
     )

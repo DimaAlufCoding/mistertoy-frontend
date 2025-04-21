@@ -21,13 +21,47 @@ function query(filterBy = {}) {
         .then(toys => {
             if (!filterBy.txt) filterBy.txt = ''
             if (!filterBy.maxPrice) filterBy.maxPrice = Infinity
+            if (!filterBy.labels) filterBy.labels = []
+
             const regExp = new RegExp(filterBy.txt, 'i')
-            return toys.filter(toy =>
-                regExp.test(toy.name) &&
-                toy.price <= filterBy.maxPrice
-            )
+
+            const filteredToys =  toys.filter(toy => {
+                const nameMatches = regExp.test(toy.name)
+                const priceMatches = toy.price <= filterBy.maxPrice
+                const stockMatches = (filterBy.inStock === undefined) || (toy.inStock === filterBy.inStock)
+                const labelMatches = (filterBy.labels.length === 0 || filterBy.labels.some(label => toy.labels.includes(label)))
+ 
+
+                return nameMatches && priceMatches && stockMatches && labelMatches 
+
+            })
+
+            if(filterBy.sortBy){
+                const sortBy = filterBy.sortBy
+                filteredToys.sort((a,b)=>{
+                    if (sortBy === 'name') return a.name.localeCompare(b.name)
+                        if (sortBy === 'price') return a.price - b.price
+                        if (sortBy === 'created') return new Date(a.createdAt) - new Date(b.createdAt)
+                        return 0
+                })
+            }
+            return filteredToys
         })
 }
+
+
+// function query(filterBy){
+//     return storageService.query(STORAGE_KEY)
+//     .then(toys => {
+//         if(filterBy.txt){
+//             const regExp = new RegExp(filterBy.txt, 'i')
+//             toys = toys.filter(toy => regExp.test(toy.name))
+//         }
+
+//         if(filter)
+//     })
+
+// }
 
 function getById(toyId) {
     return storageService.get(STORAGE_KEY, toyId)

@@ -6,7 +6,9 @@ export function ToyPreview({ toy }) {
         <article>
             <h4>{toy.name}</h4>
             <h1>⛐</h1>
+            <h1>In Stock : <span>{toy.inStock.toLocaleString()}</span></h1>
             <p>Price: <span>${toy.price.toLocaleString()}</span></p>
+            <p>Labels: <span>{toy.labels.toLocaleString()}</span></p>
             <hr />
             <Link to={`/toy/edit/${toy._id}`}>Edit</Link> &nbsp; | &nbsp;
             <Link to={`/toy/${toy._id}`}>Details</Link>
