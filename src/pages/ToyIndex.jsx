@@ -1,4 +1,3 @@
-// import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -20,6 +19,7 @@ export function ToyIndex() {
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
+    console.log(filterBy)
 
     const isOnline = useOnlineStatus()
 
@@ -81,7 +81,7 @@ export function ToyIndex() {
         <div>
             <h3>Toys App</h3>
             <main>
-                <Link to="/car/edit">Add Toy</Link>
+                <Link to="/toy/edit">Add Toy</Link>
                 <button className='add-btn' onClick={onAddToy}>Add Random Toy ⛐</button>
                 <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
                 {!isLoading

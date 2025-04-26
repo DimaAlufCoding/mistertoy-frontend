@@ -54,11 +54,11 @@ export function ToyEdit() {
             <h2>{toyToEdit._id ? 'Edit' : 'Add'} Toy</h2>
 
             <form onSubmit={onSaveToy} >
-                <label htmlFor="vendor">Vendor : </label>
+                <label htmlFor="name">Name : </label>
                 <input type="text"
-                    name="vendor"
-                    id="vendor"
-                    placeholder="Enter vendor..."
+                    name="name"
+                    id="name"
+                    placeholder="Enter name..."
                     value={toyToEdit.name}
                     onChange={handleChange}
                 />
