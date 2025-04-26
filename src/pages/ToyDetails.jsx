@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 
 import { toyService } from "../services/toy.service.local.js"
 
+
 export function ToyDetails() {
     const [toy, setToy] = useState(null)
     const { toyId } = useParams()
@@ -28,6 +29,8 @@ export function ToyDetails() {
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi voluptas cumque tempore, aperiam sed dolorum rem! Nemo quidem, placeat perferendis tempora aspernatur sit, explicabo veritatis corrupti perspiciatis repellat, enim quibusdam!</p>
             <Link to={`/toy/edit/${toy._id}`}>Edit</Link> &nbsp;
             <Link to={`/toy`}>Back</Link>
+
         </section>
+
     )
 }
