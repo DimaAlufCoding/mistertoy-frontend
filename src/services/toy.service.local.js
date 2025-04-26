@@ -50,18 +50,6 @@ function query(filterBy = {}) {
 }
 
 
-// function query(filterBy){
-//     return storageService.query(STORAGE_KEY)
-//     .then(toys => {
-//         if(filterBy.txt){
-//             const regExp = new RegExp(filterBy.txt, 'i')
-//             toys = toys.filter(toy => regExp.test(toy.name))
-//         }
-
-//         if(filter)
-//     })
-
-// }
 
 function getById(toyId) {
     return storageService.get(STORAGE_KEY, toyId)
