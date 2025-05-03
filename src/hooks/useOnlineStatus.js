@@ -21,3 +21,6 @@ export function useOnlineStatus() {
     }, [])
     return isOnline
 }
+
+
+// Getting the status of the internet offline/ online

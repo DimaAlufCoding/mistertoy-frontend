@@ -19,7 +19,6 @@ export function ToyIndex() {
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
-    console.log(filterBy)
 
     const isOnline = useOnlineStatus()
 
@@ -59,9 +58,8 @@ export function ToyIndex() {
             })
     }
     
-    function onEditToy(toy) {
-        const price = +prompt('New price?')
-        const toyToSave = { ...toy, price }
+    function onEditToy(toyId) {
+        const toyToSave = toyService.getById(toyId)
 
         saveToy(toyToSave)
             .then((savedToy) => {
