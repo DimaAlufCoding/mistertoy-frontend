@@ -34,7 +34,8 @@ export function AppHeader() {
                 <h1>React Mister Toy</h1>
                 <nav className="app-nav">
                     <NavLink to="/toy" >Toys</NavLink>
-                    <a onClick={onToggleCart} href="#">🛒 Cart</a>
+                    <NavLink to="/about" >About</NavLink>
+                    <a onClick={onToggleCart} href="#">Cart</a>
 
                 </nav>
             </section>
