@@ -35,6 +35,7 @@ export function AppHeader() {
                 <nav className="app-nav">
                     <NavLink to="/toy" >Toys</NavLink>
                     <NavLink to="/about" >About</NavLink>
+                    <NavLink to="/dashboard">Dashboard</NavLink>
                     <a onClick={onToggleCart} href="#">Cart</a>
 
                 </nav>
