@@ -23,10 +23,14 @@ export function LoginSignup() {
         }
     }
 
-    function _signup(credentials) {
-        signup(credentials)
-            .then(() => { showSuccessMsg('Signed in successfully') })
-            .catch((err) => { showErrorMsg('Oops try again') })
+    async function _signup(credentials) {
+        try {
+            await signup(credentials)
+            showSuccessMsg('Signed in successfully')
+        } catch (err) {
+            console.log('SignUp Failed', err)
+            showErrorMsg('Oops try again', err)
+        }
     }
 
     return (
