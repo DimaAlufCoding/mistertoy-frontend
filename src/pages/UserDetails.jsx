@@ -12,16 +12,16 @@ export function UserDetails() {
         if (userId) loadUser()
     }, [userId])
 
-    function loadUser() {
-        userService.getById(userId)
-            .then(user => {
-                console.log('user:', user)
-                setUser(user)
-            })
-            .catch(err => {
-                console.log('Had issues in user details', err)
-                navigate('/')
-            })
+    async function loadUser() {
+        if (!userId) return
+        try {
+            const user = await userService.getById(userId)
+            console.log('user:', user)
+            setUser(user)
+        } catch (err){
+            console.log('Had issues in user details', err)
+            navigate('/')
+        }
     }
 
 
