@@ -12,15 +12,25 @@ export function ToyDetails() {
         if (toyId) loadToy()
     }, [toyId])
 
-    function loadToy() {
-        toyService.getById(toyId)
-            .then(toy => setToy(toy))
-            .catch(err => {
-                console.log('Had issues in toy details', err)
-                navigate('/toy')
-            })
+    async function loadToy() {
+        if (!toyId) {
+            console.log('Toy ID is missing');
+            navigate('/toy')
+            return
+        }
+
+        try {
+            const toy = await toyService.getById(toyId)
+            setToy(toy)
+        } catch (err) {
+            console.log('Had issues in toy details', err)
+            navigate('/toy')
+            return
+        }
     }
+
     if (!toy) return <div>Loading...</div>
+    
     return (
         <section className="car-details">
             <h1>Toy name : {toy.name}</h1>
