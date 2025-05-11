@@ -27,7 +27,7 @@ export async function signup(credentials) {
 
 export async function logout(credentials) {
     try {
-        const user = await serService.logout(credentials)
+        const user = await userService.logout(credentials)
         store.dispatch({ type: SET_USER, user: null })
     } catch (err) {
         console.log('user actions -> Cannot logout', err)

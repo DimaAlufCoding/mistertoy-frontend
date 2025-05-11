@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
 import { userService } from "../services/user.service.js"
+import Button from '@mui/material/Button';
+
 
 export function LoginForm({ onLogin, isSignup }) {
 
@@ -44,7 +46,8 @@ export function LoginForm({ onLogin, isSignup }) {
                 onChange={handleChange}
                 required
             />}
-            <button>{isSignup ? 'Signup' : 'Login'}</button>
+            <Button type="submit" variant="contained" color="primary"  >{isSignup ? 'Signup' : 'Login'}</Button>
+            {/* <button>{isSignup ? 'Signup' : 'Login'}</button> */}
         </form>
     )
 }

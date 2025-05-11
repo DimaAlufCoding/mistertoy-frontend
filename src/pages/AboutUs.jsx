@@ -1,6 +1,11 @@
 import { React, useState } from "react"
 import GoogleMapReact from 'google-map-react'
 
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box'
+
+
 
 const AnyReactComponent = ({ text }) => <div style={{ fontSize: '24px', cursor: 'pointer' }}>{text}</div>;
 
@@ -30,17 +35,17 @@ export function AboutUs() {
             <h2>About Us</h2>
             <p>Welcome to our toy shop! We have branches all over Israel. Click on a
                 branch to center the map and see our location.</p>
-            <div style={{ marginBottom: "1rem" }}>
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                gap={2}
+                mb={4} 
+            >
                 {branches.map((branch) => (
-                    <button
-                        key={branch.name}
-                        onClick={() => handleBranchClick(branch)}
-                        style={{ marginRight: "1rem", padding: "0.5rem 1rem" }}
-                    >
-                        {branch.name}
-                    </button>
+                    <Button variant="contained" color="primary" key={branch.name} onClick={() => handleBranchClick(branch)}>{branch.name} </Button>
                 ))}
-            </div>
+            </Box>
 
             <div style={{ height: '100vh', width: '100%' }}>
                 <GoogleMapReact

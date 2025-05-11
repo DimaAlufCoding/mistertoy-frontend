@@ -12,6 +12,8 @@ import { ToyList } from '../cmps/ToyList.jsx'
 import { useEffectOnUpdate } from '../hooks/useEffectOnUpdate.js'
 import { useOnlineStatus } from '../hooks/useOnlineStatus.js'
 import { useEffect } from 'react'
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 export function ToyIndex() {
 
@@ -78,8 +80,9 @@ export function ToyIndex() {
         <div>
             <h3>Toys App</h3>
             <main>
+                <Button variant="contained" color='primary' onClick={onAddToy}>Add Random Toy</Button>
                 <Link to="/toy/edit">Add Toy</Link>
-                <button className='add-btn' onClick={onAddToy}>Add Random Toy ⛐</button>
+                {/* <button className='add-btn' onClick={onAddToy}>Add Random Toy ⛐</button> */}
                 <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
                 {!isLoading
                     ? <ToyList
