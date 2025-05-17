@@ -8,8 +8,8 @@ export async function loadToys() {
 	store.dispatch({ type: SET_IS_LOADING, isLoading: true })
 
 	try {
-		const toys = await toyService.query(filterBy)
-		return store.dispatch({ type: SET_TOYS, toys })
+		const res = await toyService.query(filterBy)
+		return store.dispatch({ type: SET_TOYS, toys: res.toys })
 	} catch (err) {
 		console.log('toy action -> Cannot load toy', err)
 		throw err
