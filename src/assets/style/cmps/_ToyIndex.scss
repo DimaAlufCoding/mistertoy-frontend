@@ -1,0 +1,33 @@
+.toy-index {
+    .add-toy-header {
+        display: flex;
+        padding-top: 10px;
+
+    }
+
+    .toy-filter {
+        .filter-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.5em;
+
+            .MuiFormControl-root,
+            .MuiTextField-root {
+                min-width: 200px;
+
+
+            }
+
+            .MuiInputBase-input {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    h2 {
+        padding: 0.5em;
+    }
+}

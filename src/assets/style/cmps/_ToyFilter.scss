@@ -1,0 +1,17 @@
+.toy-filter {
+    background-color: $clr-secondary;
+
+    h3 {
+        margin-block-start: 0;
+    }
+
+    .filter-form {
+        flex-wrap: wrap;
+        gap: 0.5em;
+
+        input,
+        select {
+            flex-basis: 200px;
+        }
+    }
+}

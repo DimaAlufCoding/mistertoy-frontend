@@ -1,4 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
+import {
+    TextField,
+    MenuItem,
+    FormControl,
+    InputLabel,
+    Select,
+    OutlinedInput,
+    Box
+} from '@mui/material'
+
 
 import { utilService } from "../services/util.service.js"
 
@@ -7,7 +17,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({
         ...filterBy,
-        label: filterBy.labels || [],
+        labels: filterBy.labels || [],
         sortBy: filterBy.sortBy || '',
 
     })
@@ -30,63 +40,87 @@ export function ToyFilter({ filterBy, onSetFilter }) {
     }
 
     return (
-        <section className="car-filter full main-layout">
+        <section className="toy-filter">
             <h2>Toys Filter</h2>
-            <form >
-                <label htmlFor="name">Name:</label>
-                <input type="text"
+            <Box
+                component="form"
+                className="filter-form"
+            >
+                <TextField
                     id="name"
                     name="txt"
+                    label="Name"
                     placeholder="By name"
                     value={filterByToEdit.txt}
                     onChange={handleChange}
                 />
 
-                <label htmlFor="maxPrice">Max price:</label>
-                <input type="number"
+                <TextField
                     id="maxPrice"
                     name="maxPrice"
+                    label="Max Price"
+                    type="number"
                     placeholder="By max price"
                     value={filterByToEdit.maxPrice || ''}
                     onChange={handleChange}
                 />
-                <select
-                    name="inStock"
-                    value={filterBy.inStock === undefined ? 'all' : filterBy.inStock.toString()}
-                    onChange={(ev) => {
-                        const value = ev.target.value
-                        const inStock = value === 'all' ? undefined : value === 'true'
-                        onSetFilter({ ...filterBy, inStock })
-                    }}
-                >
-                    <option value="all">All</option>
-                    <option value="true">In Stock</option>
-                    <option value="false">Out of Stock</option>
-                </select>
-                <label htmlFor="labels">Labels:</label>
-                <select id="labels"
-                    name="labels"
-                    multiple
-                    value={filterByToEdit.labels}
-                    onChange={handleChange}
-                >
-                    <option value="__ALL__">-- All Labels --</option>
-                    {availableLabels.map(label => (
-                        <option key={label} value={label}>{label}</option>
-                    ))}
-                </select>
-                <select
-                    id="sortBy"
-                    name="sortBy"
-                    value={filterByToEdit.sortBy || ''}
-                    onChange={handleChange}
-                >
-                    <option value="">-- Select --</option>
-                    <option value="name">Name</option>
-                    <option value="price">Price</option>
-                    <option value="created">Created</option>
-                </select>
-            </form>
+
+                <FormControl>
+                    <InputLabel id="inStock-label">In Stock</InputLabel>
+                    <Select
+                        labelId="inStock-label"
+                        name="inStock"
+                        value={filterBy.inStock === undefined ? 'all' : filterBy.inStock.toString()}
+                        label="In Stock"
+                        onChange={(ev) => {
+                            const value = ev.target.value
+                            const inStock = value === 'all' ? undefined : value === 'true'
+                            onSetFilter({ ...filterBy, inStock })
+                        }}
+                    >
+                        <MenuItem value="all">All</MenuItem>
+                        <MenuItem value="true">In Stock</MenuItem>
+                        <MenuItem value="false">Out of Stock</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <FormControl sx={{ minWidth: 200 }}>
+                    <InputLabel id="labels-label">Labels</InputLabel>
+                    <Select
+                        labelId="labels-label"
+                        id="labels"
+                        multiple
+                        name="labels"
+                        value={filterByToEdit.labels}
+                        onChange={handleChange}
+                        input={<OutlinedInput label="Labels" />}
+                    >
+                        <MenuItem value="__ALL__">-- All Labels --</MenuItem>
+                        {availableLabels.map((label) => (
+                            <MenuItem key={label} value={label}>
+                                {label}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+                <FormControl>
+                    <InputLabel id="sortBy-label">Sort By</InputLabel>
+                    <Select
+                        labelId="sortBy-label"
+                        id="sortBy"
+                        name="sortBy"
+                        value={filterByToEdit.sortBy || ''}
+                        label="Sort By"
+                        onChange={handleChange}
+                    >
+                        <MenuItem value="">-- Select --</MenuItem>
+                        <MenuItem value="name">Name</MenuItem>
+                        <MenuItem value="price">Price</MenuItem>
+                        <MenuItem value="created">Created</MenuItem>
+                    </Select>
+                </FormControl>
+            </Box>
         </section>
     )
 }

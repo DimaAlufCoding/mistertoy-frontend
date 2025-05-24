@@ -33,8 +33,8 @@ export function AppHeader() {
     }
 
     return (
-        <header className="app-header full main-layout">
-            <section className="header-container">
+        <header className="app-header">
+            <section className="nav-wrapper flex justify-between align-center">
                 <h1>React Mister Toy</h1>
                 <Stack spacing={2} direction="row">
                     <Button component={NavLink} to="/toy" variant="contained" color="primary">
@@ -46,10 +46,14 @@ export function AppHeader() {
                     <Button component={NavLink} to="/dashboard" variant="contained" color="primary">
                         Dashboard
                     </Button>
-                    <Button variant="contained" color="primary" onClick={onLogout}>Logout</Button>
+
+                    {user ? (<section> 
+                        <Button variant="contained" color="primary" onClick={onLogout}>Logout</Button></ section>) : null
+                        }
+
 
                 </Stack>
-                
+
             </section>
             {user ? (
                 < section >

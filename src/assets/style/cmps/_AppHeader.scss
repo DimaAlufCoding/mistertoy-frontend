@@ -1,0 +1,77 @@
+.app-header {
+    padding: $layoutPadding;
+    background-color: $clr-brand1;
+    color: $clr-primary;
+
+    .logo {
+        font-family: libre, sans-serif;
+        font-size: 20rem;
+
+        button {
+            height: $buttonHeight;
+        }
+
+        @media (max-width: 760px) {
+            margin-block-end: 0.2em;
+            font-size: 5rem;
+        }
+
+
+    }
+
+    .login-page {
+        display: flex;
+        gap: $fieldPading;
+
+        .login-form {
+            display: flex;
+            justify-content: end;
+            gap: $fieldPading;
+
+            input {
+                height: $buttonHeight;
+            }
+
+            button {
+                height: $buttonHeight;
+            }
+
+        }
+        .btns{
+            display: flex;
+            align-self: center;
+            gap: $fieldPading;
+        }
+
+
+
+    }
+
+    .nav-wrapper {
+        nav {
+            margin-block-end: 1em;
+
+            a {
+                &:first-of-type {
+                    margin-inline-end: 0.5em;
+                }
+
+                &:not(:first-of-type) {
+                    margin-inline: 0.5em;
+                }
+            }
+        }
+
+        h1 {
+            font-family: libre, sans-serif;
+            font-size: 2rem;
+        }
+
+
+        @media (max-width: 760px) {
+            flex-direction: column;
+            align-items: start;
+        }
+    }
+
+}

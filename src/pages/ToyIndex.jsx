@@ -63,11 +63,11 @@ export function ToyIndex() {
 
     async function onEditToy(toyId) {
 
-        try{
+        try {
             const toyToSave = await toyService.getById(toyId)
             const savedToy = await saveToy(toyToSave)
             showSuccessMsg(`Toy updated to price: $${savedToy.price}`)
-        } catch (err){
+        } catch (err) {
             showErrorMsg('Cannot update toy', err)
         }
 
@@ -79,12 +79,27 @@ export function ToyIndex() {
     }
 
     return (
-        <div>
-            <h3>Toys App</h3>
-            <main>
-                <Button variant="contained" color='primary' onClick={onAddToy}>Add Random Toy</Button>
-                <Link to="/toy/edit">Add Toy</Link>
-                {/* <button className='add-btn' onClick={onAddToy}>Add Random Toy ⛐</button> */}
+
+        <main>
+            <section className='toy-index'>
+                <section className='add-toy-header'>
+                    <Stack spacing={2} direction="row">
+                        <Button
+                            variant="contained"
+                            color='primary'
+                            onClick={onAddToy}>
+                            Add Random Toy
+                        </Button>
+                        <Button
+                            component={Link}
+                            to="/toy/edit"
+                            variant="contained"
+                            color="primary"
+                        >
+                            Add Toy
+                        </Button>
+                    </Stack>
+                </section>
                 <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
                 {!isLoading
                     ? <ToyList
@@ -95,8 +110,7 @@ export function ToyIndex() {
                     />
                     : <div>Loading...</div>
                 }
-                <hr />
-            </main>
-        </div>
+            </section>
+        </main>
     )
 }
