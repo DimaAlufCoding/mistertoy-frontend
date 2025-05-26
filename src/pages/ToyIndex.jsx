@@ -19,7 +19,6 @@ export function ToyIndex() {
 
     const dispatch = useDispatch()
     const toys = useSelector(storeState => storeState.toyModule.toys || [])
-    console.log('Toys: hellpo', toys)
 
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)

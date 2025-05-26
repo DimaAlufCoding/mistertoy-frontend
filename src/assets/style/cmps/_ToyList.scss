@@ -55,14 +55,14 @@
                 min-width: 80px;
                 border: none;
                 border-radius: 3px;
-                background-color: color.adjust($clr-primary, $lightness: -10%);
+                background-color: darken($clr-primary, 10%);
 
                 color: white;
                 cursor: pointer;
                 text-align: center;
 
                 &:hover {
-                    background-color: color.adjust($clr-primary, $lightness: -15%);
+                    background-color: darken($clr-primary, 15%);
                 }
             }
         }
